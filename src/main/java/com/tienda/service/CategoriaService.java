@@ -15,18 +15,39 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author Alejandro
  */
-
 @Service
 public class CategoriaService {
-     @Autowired
+
+    @Autowired
     private CategoriaRepository categoriaRepository;
-    
+
     @Transactional(readOnly = true)
-    public List<Categoria> getCategorias(boolean activo) {
+    public List<Categoria> getCategorias(boolean activo) { // Read -> igresar a la bd y leer la info de categoria
         var lista = categoriaRepository.findAll();
         if (activo) {
             lista.removeIf(e -> !e.getActivo());
         }
         return lista;
+    }
+
+    @Transactional
+    public void save(Categoria categoria) {
+        categoriaRepository.save(categoria);
+    }
+
+    @Transactional
+    public boolean delete(Categoria categoria) {
+        try {
+            categoriaRepository.delete(categoria);
+            categoriaRepository.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    @Transactional (readOnly = true)
+    public Categoria getCategoria (Categoria categoria ){
+        return categoriaRepository.findById(categoria.getIdCategoria()).orElse(null);
     }
 }
