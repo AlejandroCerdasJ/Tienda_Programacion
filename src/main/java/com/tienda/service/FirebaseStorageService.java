@@ -18,16 +18,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class FirebaseStorageService {
 
     //El BuketName es el <id_del_proyecto> + ".firebasestorage.app"
-    final String BucketName = "techshop-5acea.firebasestorage.app";
+    final String BucketName = "techshop-af812.firebasestorage.app";
 
     //Esta es la ruta básica de este proyecto Techshop
     final String rutaSuperiorStorage = "techshop";
 
     //Ubicación donde se encuentra el archivo de configuración Json
-    final String rutaJsonFile = "firebase";
+    final String rutaJsonFile = "C:\\Users\\Alejandro\\Downloads\\Aplicaciones Web y Patrones\\Codigo\\Lec01";
 
     //El nombre del archivo Json
-    final String archivoJsonFile = "techshop-5acea-firebase-adminsdk-fbsvc-82db492318" + ".json";
+    final String archivoJsonFile = "techshop-af812-firebase-adminsdk-fbsvc-3d411aa9b7" + ".json";
 
     public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Integer id) {
         try {
