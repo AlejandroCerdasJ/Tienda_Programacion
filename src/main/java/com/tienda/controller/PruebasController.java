@@ -39,4 +39,36 @@ public class PruebasController {
         model.addAttribute("categorias", categorias);
         return "/pruebas/listado";
     }
+
+    //Consulta JPA Ampliada
+    @PostMapping("/query1") //localhost:80//pruebas/query1/precioInf + precioSup
+    public String consultaQuery1(@RequestParam(value = "precioInf") double precioInf,
+            @RequestParam(value = "precioSup") double precioSup, Model model) {
+        var productos = productoService.findByPrecioBetweenOrderByDescripcion(precioInf, precioSup);
+        model.addAttribute("productos", productos);
+        model.addAttribute("precioInf", precioInf);
+        model.addAttribute("precioSup", precioSup);
+        return "/pruebas/listado2"; //-> Crear html listado2
+    }
+
+    //Consulta JPQL Ampliada
+    @PostMapping("/query2") //localhost:80//pruebas/query2/precioInf + precioSup
+    public String consultaQuery2(@RequestParam(value = "precioInf") double precioInf,
+            @RequestParam(value = "precioSup") double precioSup, Model model) {
+        var productos = productoService.metodoJPQL(precioInf, precioSup);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        model.addAttribute("precioInf", precioInf);
+        model.addAttribute("precioSup", precioSup);
+        return "/pruebas/listado2"; // -> Crear html listado2
+    }
+
+    @GetMapping("/listado2")//localhost:80//pruebas/listado2/
+    public String listado2(Model model) {
+        var productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
+        return "/pruebas/listado2";
+    }
+
+    // Apliada nativa
 }
