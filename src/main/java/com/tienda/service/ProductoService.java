@@ -63,4 +63,9 @@ public class ProductoService {
     public List<Producto> metodoJPQL(double precioInf, double precioSup) {
         return productoRepository.metodoJPQL(precioInf, precioSup);
     }
+    
+    @Transactional(readOnly=true)    
+    public List<Producto> metodoNativo(double precioInf, double precioSup) {
+        return productoRepository.metodoNativo(precioInf, precioSup);
+    }
 }
